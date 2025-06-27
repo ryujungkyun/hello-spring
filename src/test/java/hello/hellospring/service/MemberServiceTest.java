@@ -1,7 +1,7 @@
 package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -28,12 +28,28 @@ class MemberServiceTest {
 
     @Test
     public void 중복_회원_예외() {
-        //given
+        //given 뭐가 주었졌는데
         Member member1 = new Member();
+        member1.setName("spring");
 
-        //when
+        Member member2 = new Member();
+        member2.setName("spring");
 
-        //then
+        //when 실행했을떄
+        memberService.join(member1);
+        IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
+
+        //then 결과는 이렇게 나와야한다
+        assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+
+/*
+        try {
+            memberService.join(member2);
+            fail();
+        } catch (IllegalStateException e) {
+            assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+        }
+*/
     }
 
     @Test
