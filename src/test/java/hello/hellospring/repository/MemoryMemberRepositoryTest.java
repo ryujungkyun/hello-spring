@@ -1,9 +1,6 @@
-package hello.hello_spring.repository;
+package hello.hellospring.repository;
 
 import hello.hellospring.domain.Member;
-import hello.hellospring.repository.MemberRepository;
-import hello.hellospring.repository.MemoryMemberRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,6 +25,7 @@ class MemoryMemberRepositoryTest {
         repository.save(member);
 
         Member result = repository.findById(member.getId()).get();
+        //왼쪽 member는 기대값, result는 결과값
         //Assertions.assertEquals(member, result);
         assertThat(member).isEqualTo(result);
     }
